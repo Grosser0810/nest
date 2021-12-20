@@ -7,21 +7,32 @@ type User {
   email: String!
   firstName: String!
   lastName: String!
-  roles: [String!]!
 }
 
 type Query {
-  getHello: String!
+  login(input: LoginInput!): User
+  currentUser: User
+  logout: User
+}
+
+input LoginInput {
+  email: String!
+  password: String!
 }
 
 type Mutation {
   registerUser(input: CreateUserInput!): User!
+  confirmUser(input: ConfirmUserInput!): User!
 }
 
 input CreateUserInput {
   firstName: String!
   lastName: String!
   email: String!
-  roles: [String!]!
   password: String!
+}
+
+input ConfirmUserInput {
+  email: String!
+  confirmToken: String!
 }
