@@ -22,9 +22,9 @@ export class User {
   @Field()
   lastName: string;
 
-  @Prop({ required: true, default: [UserRoles.USER] })
-  @Field(() => [String])
-  roles: string[];
+  // @Prop({ required: true, default: [UserRoles.USER] })
+  // @Field(() => [String])
+  // roles: string[];
 
   @Prop({ required: true })
   password: string;
@@ -72,8 +72,8 @@ export class CreateUserInput {
   @Field()
   email: string;
 
-  @Field(() => [String])
-  roles: string[];
+  // @Field(() => [String])
+  // roles: string[];
 
   @Field()
   password: string;
