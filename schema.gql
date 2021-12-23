@@ -14,6 +14,7 @@ type Query {
   login(input: LoginInput!): User
   currentUser: User
   logout: User
+  getUsers: [User!]!
 }
 
 input LoginInput {

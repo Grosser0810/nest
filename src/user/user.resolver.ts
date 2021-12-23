@@ -30,4 +30,9 @@ export class UserResolver {
   async logout( @Context() context: Ctx) {
     return this.userService.logout(context)
   }
+
+  @Query(() => [User])
+  async getUsers() {
+    return this.userService.getUsers()
+  }
 }

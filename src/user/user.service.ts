@@ -62,4 +62,8 @@ export class UserService {
     context.res.cookie('token', '', { ...cookieOptions, maxAge: 0 });
     return null;
   }
+
+  async getUsers() {
+    return await this.userModel.find().exec();
+  }
 }
