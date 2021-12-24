@@ -24,6 +24,7 @@ input LoginInput {
 
 type Mutation {
   registerUser(input: CreateUserInput!): User!
+  updateUser(input: UpdateUserInput!): User!
   confirmUser(input: ConfirmUserInput!): User!
 }
 
@@ -33,6 +34,14 @@ input CreateUserInput {
   email: String!
   roles: [String!]!
   password: String!
+}
+
+input UpdateUserInput {
+  _id: ID!
+  firstName: String
+  lastName: String
+  email: String
+  roles: [String!]
 }
 
 input ConfirmUserInput {

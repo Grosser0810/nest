@@ -96,3 +96,21 @@ export class LoginInput {
   @Field()
   password: string;
 }
+
+@InputType()
+export class UpdateUserInput {
+  @Field(() => ID)
+  _id: number;
+
+  @Field({ nullable: true })
+  firstName?: string;
+
+  @Field({ nullable: true })
+  lastName?: string;
+
+  @Field({ nullable: true })
+  email?: string;
+
+  @Field(() => [String], { nullable: true })
+  roles?: TUserRoles[];
+}
