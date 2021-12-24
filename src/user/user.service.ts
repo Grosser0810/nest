@@ -6,7 +6,8 @@ import { omit } from 'lodash';
 import { CookieOptions } from 'express';
 import { ConfirmUserInput, CreateUserInput, LoginInput, UpdateUserInput, User, UserDocument } from './user.schema';
 import { Ctx } from 'src/utils/types/context.type';
-import { signJwt } from '../utils/jwt/jwt.utils';
+import { decode, signJwt } from '../utils/jwt/jwt.utils';
+import { JwtPayload } from 'jsonwebtoken';
 
 
 const cookieOptions: CookieOptions = {
@@ -58,7 +59,9 @@ export class UserService {
     }
 
     const jwt = signJwt(omit(user.toJSON(), ['password', 'active']));
-    context.res.cookie('token', jwt, { ...cookieOptions });
+    const { iat } = decode(jwt) as JwtPayload;
+    const expiresDate = new Date((iat * 1000) + 60 * 60 * 24 * 1000);
+    context.res.cookie('token', jwt, { ...cookieOptions, expires: expiresDate });
     return user;
   }
 
