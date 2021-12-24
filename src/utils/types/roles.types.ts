@@ -1,0 +1,1 @@
+export type TUserRoles = 'admin' | 'manage' | 'user';

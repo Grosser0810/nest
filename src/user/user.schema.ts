@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { genSalt, hash, compare } from 'bcrypt';
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { UserRoles } from '../utils/enums/roles.enum,';
+import { TUserRoles } from '../utils/types/roles.types';
 
 @Schema()
 @ObjectType()
@@ -22,9 +22,9 @@ export class User {
   @Field()
   lastName: string;
 
-  // @Prop({ required: true, default: [UserRoles.USER] })
-  // @Field(() => [String])
-  // roles: string[];
+  @Prop({ required: false, default: ['user'] })
+  @Field(() => [String], { nullable: true })
+  roles: TUserRoles[];
 
   @Prop({ required: true })
   password: string;
@@ -72,8 +72,8 @@ export class CreateUserInput {
   @Field()
   email: string;
 
-  // @Field(() => [String])
-  // roles: string[];
+  @Field(() => [String])
+  roles: TUserRoles[];
 
   @Field()
   password: string;
@@ -95,4 +95,22 @@ export class LoginInput {
 
   @Field()
   password: string;
+}
+
+@InputType()
+export class UpdateUserInput {
+  @Field(() => ID)
+  _id: number;
+
+  @Field({ nullable: true })
+  firstName?: string;
+
+  @Field({ nullable: true })
+  lastName?: string;
+
+  @Field({ nullable: true })
+  email?: string;
+
+  @Field(() => [String], { nullable: true })
+  roles?: TUserRoles[];
 }

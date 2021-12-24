@@ -7,7 +7,8 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { decode } from './utils/jwt/jwt.utils';
 import { ConfigModule } from '@nestjs/config';
-// import { userRolesResolver } from './utils/enums/roles.enum,';
+import { ChatModule } from './chat/chat.module';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -22,12 +23,11 @@ import { ConfigModule } from '@nestjs/config';
         }
         return { req, res };
       },
-      // resolvers: {
-      //   UserRoles: userRolesResolver
-      // }
     }),
     MongooseModule.forRoot(process.env.DATABASE),
     UserModule,
+    ChatModule,
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
